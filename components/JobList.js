@@ -1,14 +1,18 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Grid,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
 import styled from "styled-components";
 import Title from "./Title";
-
+import SearchIcon from "@mui/icons-material/Search";
 const jobListData = [
   {
     name: "Task yapılacak",
@@ -28,6 +32,25 @@ const JobList = () => {
   return (
     <>
       <Title text="Job List" />
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={8}>
+          <TextField
+            fullWidth
+            label="With normal TextField"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <TextField label="Job Name" variant="outlined" fullWidth />
+        </Grid>
+      </Grid>
 
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
