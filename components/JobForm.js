@@ -21,7 +21,7 @@ const JobForm = () => {
     <>
       <Title text="Create New Job" />
       <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <FormControl fullWidth>
             <TextField
               id="outlined-basic"
@@ -30,7 +30,7 @@ const JobForm = () => {
             />
           </FormControl>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={12} md={2.5}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Age</InputLabel>
             <Select
@@ -46,7 +46,7 @@ const JobForm = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid container item xs={2} alignItems="center">
+        <Grid container item xs={12} md={1.5} alignItems="center">
           <Button variant="contained" size="large">
             + CREATE
           </Button>
