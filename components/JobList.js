@@ -9,10 +9,14 @@ import {
   Grid,
   TextField,
   InputAdornment,
+  Button,
 } from "@mui/material";
 import styled from "styled-components";
 import Title from "./Title";
 import SearchIcon from "@mui/icons-material/Search";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 const jobListData = [
   {
     name: "Task yapılacak",
@@ -58,7 +62,7 @@ const JobList = () => {
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell align="center">Priority</TableCell>
-              <TableCell align="left">Action</TableCell>
+              <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -75,7 +79,14 @@ const JobList = () => {
                     <ColorCell>{row.priority}</ColorCell>
                   </CellWrapper>
                 </TableCell>
-                <TableCell>{/* Butonlar Gelecek */}</TableCell>
+                <TableCell align="center">
+                  <ActionButton>
+                    <EditIcon />
+                  </ActionButton>
+                  <ActionButton hoverBC="red">
+                    <DeleteIcon />
+                  </ActionButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -97,5 +108,14 @@ const CellWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
+const ActionButton = styled(Button)`
+  width: min-content;
+  background-color: gray;
+  color: white;
+  margin-right: 1%;
 
+  :hover {
+    background-color: ${(props) => (props.hoverBC ? props.hoverBC : "black")};
+  }
+`;
 export default JobList;
