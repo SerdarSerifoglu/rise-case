@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 import JobForm from "../components/JobForm";
+import JobList from "../components/JobList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <JobForm />
+      <JobList></JobList>
     </>
   );
 }
