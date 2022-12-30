@@ -41,6 +41,10 @@ const JobForm = () => {
   };
 
   const buttonClickEvent = async () => {
+    if (jobName === "" || jobPriority === "") {
+      alert("Job name or Job Priority fields cannot be empty");
+      return;
+    }
     await dispatch(addJob({ uid: uuidv4(), jobName, jobPriority }));
   };
 
