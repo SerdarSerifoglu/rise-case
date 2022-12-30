@@ -73,6 +73,15 @@ const jobListSlice = createSlice({
         );
       }
     },
+    deleteJobByUID: (state, action) => {
+      for (let i = 0; i < state.jobList.length; i++) {
+        if (state.jobList[i].uid === action.payload) {
+          state.jobList.splice(i, 1);
+        }
+      }
+
+      localStorage.setItem("jobList", JSON.stringify(state.jobList));
+    },
   },
 });
 
@@ -84,5 +93,6 @@ export const {
   clearJobListFilter,
   sortJobListName,
   sortJobListPriority,
+  deleteJobByUID,
 } = jobListSlice.actions;
 export default jobListSlice.reducer;

@@ -14,6 +14,11 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import styled from "styled-components";
 import Title from "./Title";
@@ -33,6 +38,8 @@ import {
   sortJobListPriority,
 } from "../redux/jobList/jobListSlice";
 
+import DeleteDialog from "../components/DeleteDialog";
+
 const JobList = ({ listData }) => {
   const dispatch = useDispatch();
   const allPriorities = useSelector(priorities);
@@ -43,6 +50,9 @@ const JobList = ({ listData }) => {
 
   const [sortJobName, setSortJobName] = useState(true);
   const [sortJobPriority, setSortJobPriority] = useState(true);
+
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedRowData, setSelectedRowData] = useState({});
 
   const jobNameChangeEvent = async (e) => {
     setJobNameFilter(e.target.value);
@@ -176,7 +186,13 @@ const JobList = ({ listData }) => {
                   <ActionButton>
                     <EditIcon />
                   </ActionButton>
-                  <ActionButton hoverBC="red">
+                  <ActionButton
+                    onClick={() => {
+                      setDeleteDialogOpen(true);
+                      setSelectedRowData(row);
+                    }}
+                    hoverBC="red"
+                  >
                     <DeleteIcon />
                   </ActionButton>
                 </TableCell>
@@ -185,6 +201,12 @@ const JobList = ({ listData }) => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <DeleteDialog
+        rowData={selectedRowData}
+        state={deleteDialogOpen}
+        setState={setDeleteDialogOpen}
+      ></DeleteDialog>
     </>
   );
 };
