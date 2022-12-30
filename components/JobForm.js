@@ -9,7 +9,6 @@ import {
   Grid,
 } from "@mui/material";
 import { useState } from "react";
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addJob,
