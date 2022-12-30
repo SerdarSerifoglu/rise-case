@@ -21,13 +21,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   priorities,
   updateJobListFilter,
   clearJobListFilter,
-  sortJobList,
+  sortJobListName,
+  sortJobListPriority,
 } from "../redux/jobList/jobListSlice";
 
 const JobList = ({ listData }) => {
@@ -64,7 +67,7 @@ const JobList = ({ listData }) => {
   };
 
   useEffect(() => {
-    dispatch(sortJobList(sortJobName));
+    dispatch(sortJobListName(sortJobName));
   }, [sortJobName]);
 
   const sortJobPriorityEvent = () => {
@@ -72,7 +75,7 @@ const JobList = ({ listData }) => {
   };
 
   useEffect(() => {
-    dispatch(sortJobList(sortJobPriority));
+    dispatch(sortJobListPriority(sortJobPriority));
   }, [sortJobPriority]);
 
   return (
@@ -130,11 +133,23 @@ const JobList = ({ listData }) => {
         <Table aria-label="simple table">
           <TableHeadStyle>
             <TableRow>
-              <TableCell onClick={sortJobNameEvent}>Name</TableCell>
-              <TableCell onClick={sortJobPriorityEvent} align="center">
+              <SortTableCellStyle onClick={sortJobNameEvent}>
+                Name
+                {sortJobName ? (
+                  <ArrowDownwardIcon fontSize="small" />
+                ) : (
+                  <ArrowUpwardIcon fontSize="small" />
+                )}
+              </SortTableCellStyle>
+              <SortTableCellStyle onClick={sortJobPriorityEvent} align="center">
                 Priority
-              </TableCell>
-              <TableCell align="center">Action</TableCell>
+                {sortJobPriority ? (
+                  <ArrowDownwardIcon fontSize="small" />
+                ) : (
+                  <ArrowUpwardIcon fontSize="small" />
+                )}
+              </SortTableCellStyle>
+              <TableCellStyle align="center">Action</TableCellStyle>
             </TableRow>
           </TableHeadStyle>
           <TableBody>
@@ -206,6 +221,16 @@ const FilterGrid = styled(Grid)`
 
 const TableHeadStyle = styled(TableHead)`
   background-color: #e1d7c6;
+`;
+
+const TableCellStyle = styled(TableCell)`
+  font-size: 1rem;
+`;
+
+const SortTableCellStyle = styled(TableCellStyle)`
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export default JobList;
