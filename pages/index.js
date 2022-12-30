@@ -44,7 +44,8 @@ const Home = (props) => {
 
 export async function getServerSideProps() {
   // Fetch data from an API or database
-  const res = await fetch("http://localhost:3000/api/priorities");
+  // const res = await fetch("http://localhost:3000/api/priorities");
+  const res = await fetch("https://rise-case.vercel.app/api/priorities");
   const priorities = await res.json();
 
   // Pass data to the page via props
