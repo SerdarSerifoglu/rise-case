@@ -17,7 +17,7 @@ import {
   Grid,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { priorities } from "../redux/jobList/jobListSlice";
+import { priorities, sortJobListPriority } from "../redux/jobList/jobListSlice";
 import styled from "styled-components";
 
 export default function UpdateDialog(props) {
@@ -86,6 +86,7 @@ export default function UpdateDialog(props) {
                     updateDataPart: { jobPriority: jobPriority },
                   })
                 );
+                await dispatch(sortJobListPriority(true));
                 handleClose();
               }}
               autoFocus

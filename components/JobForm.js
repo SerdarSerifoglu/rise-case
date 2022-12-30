@@ -11,7 +11,11 @@ import {
 import { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { addJob, priorities } from "../redux/jobList/jobListSlice";
+import {
+  addJob,
+  priorities,
+  sortJobListPriority,
+} from "../redux/jobList/jobListSlice";
 import { v4 as uuidv4 } from "uuid";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -48,6 +52,7 @@ const JobForm = () => {
     await dispatch(
       addJob({ uid: uuidv4(), jobName: jobName.trim(), jobPriority })
     );
+    await dispatch(sortJobListPriority(true));
   };
 
   return (
