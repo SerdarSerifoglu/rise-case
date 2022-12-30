@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 
 class ErrorBoundary extends React.Component {
@@ -22,13 +23,15 @@ class ErrorBoundary extends React.Component {
       // You can render any custom fallback UI
       return (
         <div>
-          <h2>Oops, there is an error!SERDAR TEST</h2>
-          <button
-            type="button"
-            onClick={() => this.setState({ hasError: false })}
+          <h2>Oops, there is an error!</h2>
+          <Button
+            onClick={() => {
+              localStorage.removeItem("jobList");
+              this.setState({ hasError: false });
+            }}
           >
             Try again?
-          </button>
+          </Button>
         </div>
       );
     }
