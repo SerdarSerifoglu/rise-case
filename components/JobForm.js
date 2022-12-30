@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addJob, priorities } from "../redux/jobList/jobListSlice";
 import { v4 as uuidv4 } from "uuid";
+import AddIcon from "@mui/icons-material/Add";
 
 const JobForm = () => {
   const dispatch = useDispatch();
@@ -82,7 +83,7 @@ const JobForm = () => {
             size="large"
             onClick={() => buttonClickEvent()}
           >
-            + CREATE
+            <AddIcon /> CREATE
           </Button>
         </Grid>
       </Grid>

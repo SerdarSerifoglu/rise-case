@@ -20,12 +20,13 @@ import Title from "./Title";
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addJob,
   priorities,
   updateJobListFilter,
+  clearJobListFilter,
 } from "../redux/jobList/jobListSlice";
 
 const JobList = ({ listData }) => {
@@ -48,6 +49,12 @@ const JobList = ({ listData }) => {
     );
   };
 
+  const filterClearEvent = async () => {
+    setJobNameFilter("");
+    setJobPriority("");
+    await dispatch(clearJobListFilter());
+  };
+
   return (
     <>
       <Title text="Job List" />
@@ -68,7 +75,7 @@ const JobList = ({ listData }) => {
             }}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={10} md={3}>
           <FormControl fullWidth>
             <InputLabel id="job-priorty">Job Priority</InputLabel>
             <Select
@@ -83,7 +90,18 @@ const JobList = ({ listData }) => {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>{" "}
+          </FormControl>
+        </Grid>
+        <Grid container item xs={2} md={1}>
+          <Button
+            variant="outlined"
+            size="large"
+            alignItems="center"
+            justifyContent="center"
+            onClick={filterClearEvent}
+          >
+            <SearchOffIcon />
+          </Button>
         </Grid>
       </FilterGrid>
 

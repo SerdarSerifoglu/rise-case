@@ -48,6 +48,9 @@ const jobListSlice = createSlice({
       const { key, value } = action.payload;
       state.jobListFilter[key] = value;
     },
+    clearJobListFilter: (state, action) => {
+      state.jobListFilter = { name: "", priority: "" };
+    },
   },
 });
 
@@ -56,5 +59,6 @@ export const {
   synchronizationJobList,
   initialPriorities,
   updateJobListFilter,
+  clearJobListFilter,
 } = jobListSlice.actions;
 export default jobListSlice.reducer;
