@@ -7,6 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch } from "react-redux";
 import { deleteJobByUID } from "../redux/jobList/jobListSlice";
+import styled from "styled-components";
 
 export default function DeleteDialog(props) {
   const dispatch = useDispatch();
@@ -33,8 +34,11 @@ export default function DeleteDialog(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>CANCEL</Button>
-          <Button
+          <ButtonStyleCancel bcolor="#DDDDDD" onClick={handleClose}>
+            CANCEL
+          </ButtonStyleCancel>
+          <ButtonStyleSuccess
+            bcolor="#F05454"
             onClick={async () => {
               await dispatch(deleteJobByUID(rowData.uid));
               handleClose();
@@ -42,9 +46,24 @@ export default function DeleteDialog(props) {
             autoFocus
           >
             APPROVE
-          </Button>
+          </ButtonStyleSuccess>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
+
+const ButtonStyleSuccess = styled(Button)`
+  background-color: ${(props) => props.bcolor};
+  color: white;
+  :hover {
+    background-color: #dc0000;
+  }
+`;
+const ButtonStyleCancel = styled(Button)`
+  background-color: ${(props) => props.bcolor};
+  color: black;
+  :hover {
+    background-color: #b2b2b2;
+  }
+`;

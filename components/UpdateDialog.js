@@ -77,8 +77,11 @@ export default function UpdateDialog(props) {
             </FormControl>
           </DialogContentStyle>
           <DialogActions>
-            <Button onClick={handleClose}>CANCEL</Button>
-            <Button
+            <ButtonStyleCancel bcolor="#DDDDDD" onClick={handleClose}>
+              CANCEL
+            </ButtonStyleCancel>
+            <ButtonStyleSuccess
+              bcolor="#F05454"
               onClick={async () => {
                 await dispatch(
                   updateJobByUID({
@@ -91,8 +94,8 @@ export default function UpdateDialog(props) {
               }}
               autoFocus
             >
-              UPDATE
-            </Button>
+              SAVE
+            </ButtonStyleSuccess>
           </DialogActions>
         </Dialog>
       </div>
@@ -103,4 +106,19 @@ export default function UpdateDialog(props) {
 const DialogContentStyle = styled(DialogContent)`
   width: 260px;
   height: 25vh;
+`;
+
+const ButtonStyleSuccess = styled(Button)`
+  background-color: ${(props) => props.bcolor};
+  color: white;
+  :hover {
+    background-color: #dc0000;
+  }
+`;
+const ButtonStyleCancel = styled(Button)`
+  background-color: ${(props) => props.bcolor};
+  color: black;
+  :hover {
+    background-color: #b2b2b2;
+  }
 `;
