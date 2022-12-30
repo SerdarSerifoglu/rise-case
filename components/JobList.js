@@ -179,7 +179,11 @@ const JobList = ({ listData }) => {
                 key={row.uid}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell
+                  style={{ maxWidth: "30vw" }}
+                  component="th"
+                  scope="row"
+                >
                   {row.jobName}
                 </TableCell>
                 <TableCell align="center">
@@ -200,16 +204,16 @@ const JobList = ({ listData }) => {
                       setUpdateDialogOpen(true);
                     }}
                   >
-                    <EditIcon />
+                    <EditIcon sx={{ fontSize: 20 }} />
                   </ActionButton>
                   <ActionButton
                     onClick={() => {
                       setSelectedRowData(row);
                       setDeleteDialogOpen(true);
                     }}
-                    hoverBC="red"
+                    hoverbc="red"
                   >
-                    <DeleteIcon />
+                    <DeleteIcon sx={{ fontSize: 20 }} />
                   </ActionButton>
                 </TableCell>
               </TableRow>
@@ -249,12 +253,15 @@ const CellWrapper = styled.div`
 
 const ActionButton = styled(Button)`
   width: min-content;
+  min-width: 48px;
+  height: 30px;
   background-color: gray;
   color: white;
   margin-right: 1%;
+  margin-bottom: 2%;
 
   :hover {
-    background-color: ${(props) => (props.hoverBC ? props.hoverBC : "black")};
+    background-color: ${(props) => (props.hoverbc ? props.hoverbc : "black")};
   }
 `;
 
