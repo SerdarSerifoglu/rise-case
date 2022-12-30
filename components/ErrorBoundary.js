@@ -1,3 +1,5 @@
+import React from "react";
+
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ class ErrorBoundary extends React.Component {
       // You can render any custom fallback UI
       return (
         <div>
-          <h2>Oops, there is an error!</h2>
+          <h2>Oops, there is an error!SERDAR TEST</h2>
           <button
             type="button"
             onClick={() => this.setState({ hasError: false })}
