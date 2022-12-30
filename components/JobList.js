@@ -87,7 +87,13 @@ const JobList = ({ listData }) => {
                 </TableCell>
                 <TableCell align="center">
                   <CellWrapper>
-                    <ColorCell>{row.jobPriority}</ColorCell>
+                    <ColorCell
+                      bc={
+                        allPriorities.find((x) => x.id == row.jobPriority).color
+                      }
+                    >
+                      {allPriorities.find((x) => x.id == row.jobPriority).name}
+                    </ColorCell>
                   </CellWrapper>
                 </TableCell>
                 <TableCell align="center">
@@ -108,7 +114,7 @@ const JobList = ({ listData }) => {
 };
 
 const ColorCell = styled.div`
-  background-color: red;
+  background-color: ${(props) => props.bc};
   color: white;
   max-width: min-content;
   padding: 3px 10px;
