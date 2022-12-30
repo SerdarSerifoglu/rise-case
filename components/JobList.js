@@ -36,6 +36,7 @@ import {
   clearJobListFilter,
   sortJobListName,
   sortJobListPriority,
+  totalJobListCount,
 } from "../redux/jobList/jobListSlice";
 
 import DeleteDialog from "./DeleteDialog";
@@ -43,6 +44,7 @@ import UpdateDialog from "./UpdateDialog";
 
 const JobList = ({ listData }) => {
   const dispatch = useDispatch();
+  const jobListCount = useSelector(totalJobListCount);
   const allPriorities = useSelector(priorities);
 
   const [jobPriority, setJobPriority] = useState("");
@@ -145,7 +147,9 @@ const JobList = ({ listData }) => {
           </Button>
         </Grid>
       </FilterGrid>
-
+      <Grid container display="flex" justifyContent="flex-end">
+        {listData.length} / {jobListCount}
+      </Grid>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHeadStyle>

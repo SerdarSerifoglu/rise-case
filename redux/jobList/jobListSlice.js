@@ -20,6 +20,7 @@ export const jobList = (state) =>
       return true;
     }
   });
+export const totalJobListCount = (state) => state.jobList.jobList.length;
 export const priorities = (state) => state.jobList.priorities;
 
 const jobListSlice = createSlice({
