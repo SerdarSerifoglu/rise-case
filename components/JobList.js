@@ -16,36 +16,8 @@ import Title from "./Title";
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { synchronizationJobList } from "../redux/jobList/jobListSlice";
 
-const jobListData = [
-  {
-    name: "Task yapılacak",
-    priority: "Acil",
-  },
-  {
-    name: "Tasarım yapılacak",
-    priority: "Önemli",
-  },
-  {
-    name: "Canlıya çık",
-    priority: "Önemli",
-  },
-];
-
-const JobList = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    synchronizationStoreAndLocalStorage();
-  }, []);
-
-  const synchronizationStoreAndLocalStorage = async () => {
-    await dispatch(synchronizationJobList());
-  };
-
+const JobList = ({ listData }) => {
   return (
     <>
       <Title text="Job List" />
@@ -79,17 +51,17 @@ const JobList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {jobListData.map((row, index) => (
+            {listData.map((row, index) => (
               <TableRow
-                key={index}
+                key={row.uid}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.jobName}
                 </TableCell>
                 <TableCell align="center">
                   <CellWrapper>
-                    <ColorCell>{row.priority}</ColorCell>
+                    <ColorCell>{row.jobPriority}</ColorCell>
                   </CellWrapper>
                 </TableCell>
                 <TableCell align="center">

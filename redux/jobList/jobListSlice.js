@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const IsLoading = (state) => state.general.isLoading;
-
 const initialState = {
   jobList: [],
 };
+export const jobList = (state) => state.jobList.jobList;
 
 const jobListSlice = createSlice({
   name: "jobList",
@@ -12,7 +11,11 @@ const jobListSlice = createSlice({
   reducers: {
     synchronizationJobList: (state, action) => {
       const localStorageJobList = JSON.parse(localStorage.getItem("jobList"));
-      if (state.jobList.length != localStorageJobList.length) {
+
+      if (
+        localStorageJobList != null &&
+        state.jobList.length != localStorageJobList.length
+      ) {
         state.jobList = localStorageJobList;
       }
     },
