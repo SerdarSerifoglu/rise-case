@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import JobForm from "../components/JobForm";
 import JobList from "../components/JobList";
 import { useEffect } from "react";
@@ -9,6 +8,8 @@ import {
   jobList,
   initialPriorities,
 } from "../redux/jobList/jobListSlice";
+import Top from "../components/Top";
+import Footer from "../components/Footer";
 
 const Home = (props) => {
   const { priorities } = props;
@@ -36,8 +37,10 @@ const Home = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Top></Top>
       <JobForm />
       <JobList listData={jobListData}></JobList>
+      <Footer></Footer>
     </>
   );
 };
