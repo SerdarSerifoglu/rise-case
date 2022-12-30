@@ -8,6 +8,7 @@ const Footer = () => {
       <GridWrapper container>
         <GithubRepo
           item
+          xs={12}
           md={6}
           display="flex"
           alignItems="flex-start"
@@ -22,6 +23,7 @@ const Footer = () => {
         </GithubRepo>
         <PersonalInfo
           item
+          xs={12}
           md={6}
           display="flex"
           alignItems="flex-end"
@@ -40,7 +42,7 @@ const Footer = () => {
 };
 
 const GridWrapper = styled(Grid)`
-  height: 64px;
+  height: auto;
   line-height: 64px;
   background-color: #dddddd;
 `;
