@@ -2,8 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   jobList: [],
+  priorities: [],
 };
 export const jobList = (state) => state.jobList.jobList;
+export const priorities = (state) => state.jobList.priorities;
 
 const jobListSlice = createSlice({
   name: "jobList",
@@ -24,8 +26,12 @@ const jobListSlice = createSlice({
 
       localStorage.setItem("jobList", JSON.stringify(state.jobList));
     },
+    initialPriorities: (state, action) => {
+      state.priorities = action.payload;
+    },
   },
 });
 
-export const { addJob, synchronizationJobList } = jobListSlice.actions;
+export const { addJob, synchronizationJobList, initialPriorities } =
+  jobListSlice.actions;
 export default jobListSlice.reducer;

@@ -11,11 +11,13 @@ import {
 import { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { addJob } from "../redux/jobList/jobListSlice";
+import { addJob, priorities } from "../redux/jobList/jobListSlice";
 import { v4 as uuidv4 } from "uuid";
 
 const JobForm = () => {
   const dispatch = useDispatch();
+
+  const allPriorities = useSelector(priorities);
 
   const [jobName, setJobName] = useState("");
   const [jobNameErrorMessage, setJobNameErrorMessage] = useState("");
@@ -59,17 +61,16 @@ const JobForm = () => {
         </Grid>
         <Grid item xs={12} md={2.5}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="job-priorty">Job Priority</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="job-priorty"
               value={jobPriority}
-              label="Age"
+              label="Job Priority"
               onChange={handleChange}
             >
-              <MenuItem value={1}>Acil</MenuItem>
-              <MenuItem value={2}>Önemli</MenuItem>
-              <MenuItem value={3}>Normal</MenuItem>
+              {allPriorities.map((e) => (
+                <MenuItem value={e.id}>{e.name}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>

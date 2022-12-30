@@ -4,18 +4,29 @@ import JobForm from "../components/JobForm";
 import JobList from "../components/JobList";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { synchronizationJobList, jobList } from "../redux/jobList/jobListSlice";
+import {
+  synchronizationJobList,
+  jobList,
+  initialPriorities,
+} from "../redux/jobList/jobListSlice";
 
-const Home = () => {
+const Home = (props) => {
+  const { priorities } = props;
+
   const dispatch = useDispatch();
   const jobListData = useSelector(jobList);
 
   useEffect(() => {
     synchronizationStoreAndLocalStorage();
+    initialPrioritiesData();
   }, []);
 
   const synchronizationStoreAndLocalStorage = async () => {
     await dispatch(synchronizationJobList());
+  };
+
+  const initialPrioritiesData = async () => {
+    await dispatch(initialPriorities(priorities));
   };
   return (
     <>
@@ -31,4 +42,12 @@ const Home = () => {
   );
 };
 
+export async function getStaticProps() {
+  // Fetch data from an API or database
+  const res = await fetch("http://localhost:3000/api/priorities");
+  const priorities = await res.json();
+
+  // Pass data to the page via props
+  return { props: { priorities } };
+}
 export default Home;
