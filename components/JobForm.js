@@ -33,9 +33,12 @@ const JobForm = () => {
     if (e.target.value.length > 255) {
       setJobNameErrorMessage("255 karakterden fazla içerik girilemez!");
     } else {
-      setJobName(e.target.value);
-      if (jobNameErrorMessage != "") {
-        setJobNameErrorMessage("");
+      const alphanumericRegex = /^[a-zA-Z0-9ÇŞĞÜİÖçşğüöı\s]*$/;
+      if (alphanumericRegex.test(e.target.value)) {
+        setJobName(e.target.value);
+        if (jobNameErrorMessage != "") {
+          setJobNameErrorMessage("");
+        }
       }
     }
   };
