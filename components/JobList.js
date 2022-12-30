@@ -16,6 +16,9 @@ import Title from "./Title";
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { synchronizationJobList } from "../redux/jobList/jobListSlice";
 
 const jobListData = [
   {
@@ -33,6 +36,16 @@ const jobListData = [
 ];
 
 const JobList = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    synchronizationStoreAndLocalStorage();
+  }, []);
+
+  const synchronizationStoreAndLocalStorage = async () => {
+    await dispatch(synchronizationJobList());
+  };
+
   return (
     <>
       <Title text="Job List" />
