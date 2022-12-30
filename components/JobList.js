@@ -22,16 +22,32 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addJob, priorities } from "../redux/jobList/jobListSlice";
+import {
+  addJob,
+  priorities,
+  updateJobListFilter,
+} from "../redux/jobList/jobListSlice";
 
 const JobList = ({ listData }) => {
+  const dispatch = useDispatch();
   const allPriorities = useSelector(priorities);
 
   const [jobPriority, setJobPriority] = useState("");
 
-  const handleChange = (e) => {
-    setJobPriority(e.target.value);
+  const [jobNameFilter, setJobNameFilter] = useState("");
+
+  const jobNameChangeEvent = async (e) => {
+    setJobNameFilter(e.target.value);
+    await dispatch(updateJobListFilter({ key: "name", value: e.target.value }));
   };
+
+  const jobPriorityChangeEvent = async (e) => {
+    setJobPriority(e.target.value);
+    await dispatch(
+      updateJobListFilter({ key: "priority", value: e.target.value })
+    );
+  };
+
   return (
     <>
       <Title text="Job List" />
@@ -41,6 +57,8 @@ const JobList = ({ listData }) => {
           <TextField
             fullWidth
             label="Job Name"
+            value={jobNameFilter}
+            onChange={jobNameChangeEvent}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -57,10 +75,12 @@ const JobList = ({ listData }) => {
               labelId="job-priorty"
               value={jobPriority}
               label="Job Priority"
-              onChange={handleChange}
+              onChange={jobPriorityChangeEvent}
             >
-              {allPriorities.map((e) => (
-                <MenuItem value={e.id}>{e.name}</MenuItem>
+              {allPriorities.map((e, i) => (
+                <MenuItem key={i} value={e.id}>
+                  {e.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>{" "}
@@ -120,11 +140,13 @@ const ColorCell = styled.div`
   padding: 3px 10px;
   border-radius: 5px;
 `;
+
 const CellWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
 `;
+
 const ActionButton = styled(Button)`
   width: min-content;
   background-color: gray;
@@ -144,4 +166,5 @@ const FilterGrid = styled(Grid)`
 const TableHeadStyle = styled(TableHead)`
   background-color: #e1d7c6;
 `;
+
 export default JobList;
