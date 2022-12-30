@@ -29,7 +29,7 @@ export default function DeleteDialog(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            "{rowData.jobName}" will be deleted !
+            &quot;{rowData.jobName}&quot; will be deleted !
           </DialogContentText>
         </DialogContent>
         <DialogActions>
