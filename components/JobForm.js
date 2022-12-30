@@ -41,11 +41,13 @@ const JobForm = () => {
   };
 
   const buttonClickEvent = async () => {
-    if (jobName === "" || jobPriority === "") {
+    if (jobName.trim() === "" || jobPriority === "") {
       alert("Job name and Job Priority fields cannot be empty");
       return;
     }
-    await dispatch(addJob({ uid: uuidv4(), jobName, jobPriority }));
+    await dispatch(
+      addJob({ uid: uuidv4(), jobName: jobName.trim(), jobPriority })
+    );
   };
 
   return (
