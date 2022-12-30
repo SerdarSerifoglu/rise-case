@@ -51,6 +51,17 @@ const jobListSlice = createSlice({
     clearJobListFilter: (state, action) => {
       state.jobListFilter = { name: "", priority: "" };
     },
+    sortJobList: (state, action) => {
+      if (action.payload) {
+        state.jobList = state.jobList.sort((a, b) =>
+          a.jobName.localeCompare(b.jobName)
+        );
+      } else {
+        state.jobList = state.jobList.sort((a, b) =>
+          b.jobName.localeCompare(a.jobName)
+        );
+      }
+    },
   },
 });
 
@@ -60,5 +71,6 @@ export const {
   initialPriorities,
   updateJobListFilter,
   clearJobListFilter,
+  sortJobList,
 } = jobListSlice.actions;
 export default jobListSlice.reducer;

@@ -21,12 +21,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   priorities,
   updateJobListFilter,
   clearJobListFilter,
+  sortJobList,
 } from "../redux/jobList/jobListSlice";
 
 const JobList = ({ listData }) => {
@@ -36,6 +37,9 @@ const JobList = ({ listData }) => {
   const [jobPriority, setJobPriority] = useState("");
 
   const [jobNameFilter, setJobNameFilter] = useState("");
+
+  const [sortJobName, setSortJobName] = useState(true);
+  const [sortJobPriority, setSortJobPriority] = useState(true);
 
   const jobNameChangeEvent = async (e) => {
     setJobNameFilter(e.target.value);
@@ -54,6 +58,22 @@ const JobList = ({ listData }) => {
     setJobPriority("");
     await dispatch(clearJobListFilter());
   };
+
+  const sortJobNameEvent = () => {
+    setSortJobName(!sortJobName);
+  };
+
+  useEffect(() => {
+    dispatch(sortJobList(sortJobName));
+  }, [sortJobName]);
+
+  const sortJobPriorityEvent = () => {
+    setSortJobPriority(!sortJobPriority);
+  };
+
+  useEffect(() => {
+    dispatch(sortJobList(sortJobPriority));
+  }, [sortJobPriority]);
 
   return (
     <>
@@ -110,13 +130,15 @@ const JobList = ({ listData }) => {
         <Table aria-label="simple table">
           <TableHeadStyle>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="center">Priority</TableCell>
+              <TableCell onClick={sortJobNameEvent}>Name</TableCell>
+              <TableCell onClick={sortJobPriorityEvent} align="center">
+                Priority
+              </TableCell>
               <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHeadStyle>
           <TableBody>
-            {listData.map((row, index) => (
+            {listData.map((row) => (
               <TableRow
                 key={row.uid}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
