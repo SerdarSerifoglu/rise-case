@@ -3,14 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 export const IsLoading = (state) => state.general.isLoading;
 
 const initialState = {
-  test: false,
+  jobList: [],
 };
 
 const jobListSlice = createSlice({
   name: "jobList",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    addJob: (state, action) => {
+      state.jobList.push(action.payload);
+    },
+  },
 });
 
-export const {} = jobListSlice.actions;
+export const { addJob } = jobListSlice.actions;
 export default jobListSlice.reducer;
