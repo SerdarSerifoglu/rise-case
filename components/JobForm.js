@@ -77,7 +77,14 @@ const JobForm = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid container item xs={12} md={1.5} alignItems="center">
+        <Grid
+          container
+          item
+          xs={12}
+          md={1.5}
+          display="flex"
+          alignItems="center"
+        >
           <Button
             variant="contained"
             size="large"

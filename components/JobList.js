@@ -96,6 +96,7 @@ const JobList = ({ listData }) => {
           <Button
             variant="outlined"
             size="large"
+            display="flex"
             alignItems="center"
             justifyContent="center"
             onClick={filterClearEvent}
