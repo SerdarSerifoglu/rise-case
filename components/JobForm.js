@@ -68,8 +68,10 @@ const JobForm = () => {
               label="Job Priority"
               onChange={handleChange}
             >
-              {allPriorities.map((e) => (
-                <MenuItem value={e.id}>{e.name}</MenuItem>
+              {allPriorities.map((e, i) => (
+                <MenuItem key={i} value={e.id}>
+                  {e.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
