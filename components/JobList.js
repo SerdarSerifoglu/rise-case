@@ -38,7 +38,8 @@ import {
   sortJobListPriority,
 } from "../redux/jobList/jobListSlice";
 
-import DeleteDialog from "../components/DeleteDialog";
+import DeleteDialog from "./DeleteDialog";
+import UpdateDialog from "./UpdateDialog";
 
 const JobList = ({ listData }) => {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const JobList = ({ listData }) => {
   const [sortJobPriority, setSortJobPriority] = useState(true);
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
   const [selectedRowData, setSelectedRowData] = useState({});
 
   const jobNameChangeEvent = async (e) => {
@@ -183,13 +185,18 @@ const JobList = ({ listData }) => {
                   </CellWrapper>
                 </TableCell>
                 <TableCell align="center">
-                  <ActionButton>
+                  <ActionButton
+                    onClick={() => {
+                      setSelectedRowData(row);
+                      setUpdateDialogOpen(true);
+                    }}
+                  >
                     <EditIcon />
                   </ActionButton>
                   <ActionButton
                     onClick={() => {
-                      setDeleteDialogOpen(true);
                       setSelectedRowData(row);
+                      setDeleteDialogOpen(true);
                     }}
                     hoverBC="red"
                   >
@@ -207,6 +214,12 @@ const JobList = ({ listData }) => {
         state={deleteDialogOpen}
         setState={setDeleteDialogOpen}
       ></DeleteDialog>
+
+      <UpdateDialog
+        rowData={selectedRowData}
+        state={updateDialogOpen}
+        setState={setUpdateDialogOpen}
+      ></UpdateDialog>
     </>
   );
 };
