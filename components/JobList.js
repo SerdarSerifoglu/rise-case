@@ -57,8 +57,13 @@ const JobList = ({ listData }) => {
   const [selectedRowData, setSelectedRowData] = useState({});
 
   const jobNameChangeEvent = async (e) => {
-    setJobNameFilter(e.target.value);
-    await dispatch(updateJobListFilter({ key: "name", value: e.target.value }));
+    const alphanumericRegex = /^[a-zA-Z0-9ÇŞĞÜİÖçşğüöı\s]*$/;
+    if (alphanumericRegex.test(e.target.value)) {
+      setJobNameFilter(e.target.value);
+      await dispatch(
+        updateJobListFilter({ key: "name", value: e.target.value })
+      );
+    }
   };
 
   const jobPriorityChangeEvent = async (e) => {
@@ -110,7 +115,7 @@ const JobList = ({ listData }) => {
             }}
           />
         </Grid>
-        <Grid item xs={10} md={3}>
+        <Grid item xs={9.4} md={3}>
           <FormControl fullWidth>
             <InputLabel id="job-priorty">Job Priority</InputLabel>
             <Select
